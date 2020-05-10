@@ -6,7 +6,9 @@
 export interface InformationMoney {
     title: string
     values: number[]
-
+    color: string
+    valueIsPlus: boolean
+    perid: number
 }
 
 export default class TransectionStorage {
@@ -26,5 +28,11 @@ export default class TransectionStorage {
         }
         transections.push(transection)
         localStorage.setItem("transection", JSON.stringify(transections))
+    }
+    deleteList(index: number) {
+        const list_tr = this.list
+        list_tr.splice(index, 1)
+        localStorage.setItem("transection", JSON.stringify(list_tr))
+
     }
 }

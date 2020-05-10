@@ -12,7 +12,18 @@ form > div {
     background: rgb(96, 97, 88);
     padding-bottom: 1em;
 }
-
+.btn  {
+    padding: 1em;
+    margin:auto;
+    width: 100%;margin-top: 0.1em;
+    background: rgba(0, 0, 0, 0);
+    border: 0.1em solid;
+    color:white;cursor: pointer;transition: all 0.3s ease-in;
+}
+.btn:hover {
+    border:0.5em solid;
+    border-radius: 3px;
+}
 .form label {
     color:white
 }

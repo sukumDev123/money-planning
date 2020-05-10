@@ -5,14 +5,11 @@ import { fullMonths } from '../../libs/date-variable'
 import FromTypeMoney from '../formTypeOfMoney/FromTypeMoney';
 import TransectionStorage, { InformationMoney } from '../presenters/TransectionStorage';
 import { checkAddEventContext } from "../../providers/CheckAddEventProvider"
-
-
+import { money_format } from '../presenters/MoneyFormat';
 type DataTableType = InformationMoney[];
 const write_12_month = (apidata: DataTableType): DataTableType => {
     let newData = apidata
-    newData[newData.length] = { title: "เหลือ", values: [0] }
-
-
+    newData[newData.length] = { title: "เหลือ", values: [0], color: "white", perid: 1, valueIsPlus: true }
     newData.forEach((d) => {
         for (let i = 1; i < fullMonths.length; i++) {
             d.values.push(d.values[0])
@@ -27,18 +24,17 @@ const write_12_month = (apidata: DataTableType): DataTableType => {
                 lastValue.values[ind] = nowValue.values[ind]
                 : lastValue.values[ind] -= nowValue.values[ind]
         })
+
     }
 
-    newData = newData.map(data => ({ ...data, values: data.values })) // format number to price
     return newData
 }
 const Tables: React.FC = () => {
     const [datas, setDatas] = useState<DataTableType>()
     const transectionClass = new TransectionStorage()
-    const { checked } = useContext(checkAddEventContext)
+    const { checked, setCheckOutSide } = useContext(checkAddEventContext)
     useEffect(() => {
         let isSub = true
-        console.log("asdsd")
         const apidata = transectionClass.list
         const new_data = write_12_month(apidata)
         isSub && setDatas(new_data)
@@ -53,22 +49,36 @@ const Tables: React.FC = () => {
     }
     return <div className="table-body">
         <FromTypeMoney></FromTypeMoney>
-        <h1>Tables</h1>
+        <h1 className="text-center">แสดงรายการ</h1>
         <div className="table-div">
             <table>
                 <thead>
                     <tr>
                         <th>รายการ</th>
                         {fullMonths.map(month => <th key={month}>{month}</th>)}
+                        <th>ลบ</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {datas?.map((data, i) => <tr key={i}>
-                        <td >{data.title}</td>
-                        {data.values.map((value, ind) => <td key={ind} onClick={(event) => {
-                            changeValue(ind, event)
-                        }}>{value}</td>)}
-                    </tr>)}
+                    {datas?.map((data, i) =>
+                        <tr className={data.color} key={i}>
+                            <td >{data.title}</td>
+
+                            {data.values.map((value, ind) =>
+                                <td key={ind}
+                                    onClick={(event) => {
+                                        changeValue(ind, event)
+                                    }}>
+                                    {money_format(value)}
+                                </td>)
+                            }
+
+                            <td onClick={(event) => {
+                                event.preventDefault()
+                                transectionClass.deleteList(i)
+                                setCheckOutSide(!checked)
+                            }}>{"x"}</td>
+                        </tr>)}
                 </tbody>
             </table>
         </div>
