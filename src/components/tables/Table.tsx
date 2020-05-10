@@ -1,15 +1,12 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import "./Table.css"
 import { fullMonths } from '../../libs/date-variable'
 import FromTypeMoney from '../formTypeOfMoney/FromTypeMoney';
-import { fakeApi } from '../../apis/fakeApi';
+import TransectionStorage, { InformationMoney } from '../presenters/TransectionStorage';
+import { checkAddEventContext } from "../../providers/CheckAddEventProvider"
 
-interface InformationMoney {
-    title: string
-    values: number[]
 
-}
 type DataTableType = InformationMoney[];
 const write_12_month = (apidata: DataTableType): DataTableType => {
     let newData = apidata
@@ -37,13 +34,18 @@ const write_12_month = (apidata: DataTableType): DataTableType => {
 }
 const Tables: React.FC = () => {
     const [datas, setDatas] = useState<DataTableType>()
-
-
+    const transectionClass = new TransectionStorage()
+    const { checked } = useContext(checkAddEventContext)
     useEffect(() => {
-        const apidata = fakeApi()
-        const newDatas = write_12_month(apidata)
-        setDatas(newDatas)
-    }, [])
+        let isSub = true
+        console.log("asdsd")
+        const apidata = transectionClass.list
+        const new_data = write_12_month(apidata)
+        isSub && setDatas(new_data)
+        return () => {
+            isSub = false
+        }
+    }, [checked])
 
     const changeValue = (ind: number, event: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>) => {
         event.preventDefault()
@@ -61,9 +63,9 @@ const Tables: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {datas?.map(data => <tr>
-                        <td>{data.title}</td>
-                        {data.values.map((value, ind) => <td onClick={(event) => {
+                    {datas?.map((data, i) => <tr key={i}>
+                        <td >{data.title}</td>
+                        {data.values.map((value, ind) => <td key={ind} onClick={(event) => {
                             changeValue(ind, event)
                         }}>{value}</td>)}
                     </tr>)}
