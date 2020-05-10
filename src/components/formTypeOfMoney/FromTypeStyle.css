@@ -1,0 +1,32 @@
+form {
+    width:60%;
+    margin: auto;
+    padding: 1em;
+}
+
+form > div {
+    padding: 0.2em;
+}
+
+.form {
+    background: rgb(96, 97, 88);
+    padding-bottom: 1em;
+}
+
+.form label {
+    color:white
+}
+
+form input , form select  {
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+ 
+}
+form select {
+    box-sizing: border-box;
+    border: 0.1px solid;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
