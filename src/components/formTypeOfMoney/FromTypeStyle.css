@@ -1,7 +1,8 @@
 form {
-    width:60%;
     margin: auto;
     padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 form > div {
@@ -9,13 +10,16 @@ form > div {
 }
 
 .form {
-    background: rgb(96, 97, 88);
+    background: linear-gradient(#000 , #023);
     padding-bottom: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top:1em;
 }
 .btn  {
     padding: 1em;
     margin:auto;
-    width: 100%;margin-top: 0.1em;
+    width: 100%;margin-top: 2em;
     background: rgba(0, 0, 0, 0);
     border: 0.1em solid;
     color:white;cursor: pointer;transition: all 0.3s ease-in;

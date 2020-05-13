@@ -2,9 +2,35 @@
     background: white;
 }
 .red {
-    background: rgb(250, 67, 67);
+    background: #f86060;
     color:white
 }
 .green{ 
-    background: rgb(179, 255, 65);
+    background: linear-gradient(rgb(188, 229, 133) , rgb(165, 240, 53));
+}
+.header-body {
+
+
+    background: linear-gradient(#000 , #023);
+    padding: 10px;
+}
+.header-body > ul {
+    display: flex;color:whitesmoke;
+}
+.header-body > ul > li {
+    margin-left: 1em; 
+    list-style: none;
+}
+.nav-link-custom{
+    color:white;
+    text-decoration:none;
+    transition: all 0.3s ease-in;
+}
+.nav-link-active {
+
+    text-shadow: 0px 1px  #ffffff;
+}
+.nav-link-custom:hover {
+    /* text-shadow: 0 0 5px 10px rgba(255, 255, 255, 1) ; */
+    text-shadow: 0px 1px  #ffffff;
 }

@@ -1,0 +1,17 @@
+.money-div {
+    padding: 1em;
+    border-radius: 6px;
+    background: white;
+    width: 80%;
+}
+.money-div > div  > h5 , .money-div > div  > h6{
+    padding: 0;
+    margin:0;
+}
+.money-div > div >  h6 {
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    /* background: rgb(0, 0, 0); */
+}

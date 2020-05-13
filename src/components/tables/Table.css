@@ -17,3 +17,21 @@ table td {
 .text-center {
     text-align: center;
 }
+.div-calculor-years {
+    display: flex;
+    width:40%;
+    margin:auto;
+    justify-content: space-between;
+}
+.div-calculor-years > div  > input {
+    width:100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    border-radius: 3px;
+    box-sizing: border-box;
+} 
+.div-calculor-years > div {
+
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1); 
+    padding: 1em;
+}
